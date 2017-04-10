@@ -15,13 +15,18 @@ public class Main
     public static void main(String[] args) throws IOException, InvalidSymbolExeption {
         Map<String, Integer> counter = new ConcurrentHashMap<>();
         List<Thread> threads = new ArrayList<>();
-        KillThreadStatus killThreadStatus = new KillThreadStatus();//
+        KillThreadStatus kill= new KillThreadStatus();
+        DaemonThread daemonThread= new DaemonThread(counter,kill,threads);
+// DaemonThread lol = new DaemonThread(threads, counter,KillThreadStatus);
+        //daemon daemon= new daemon(counter, KillThreadStatus, threads); //
         for (int i = 0; i < args.length; i++) {
             File file = new File(args[i]);
-            Thread thread = new Thread(new FilterCalc(file, counter, killThreadStatus));//
+            Thread thread = new Thread(new FilterCalc(file, counter, kill));
             threads.add(thread);
-            //  System.out.println("");
             thread.start();
         }
+       // Thread daemonthread = new Thread();
+//        DaemonThread daemonthread = new DaemonThread(counter,threads,KillThreadStatus);
+        daemonThread.start();
     }
 }

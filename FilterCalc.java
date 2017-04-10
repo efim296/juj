@@ -14,10 +14,14 @@ import java.util.regex.Pattern;
 public class FilterCalc implements Runnable {
     private File filePath;
     private Map<String, Integer> counter;
+    private KillThreadStatus kill;
 
-    public FilterCalc(File filePath, Map<String, Integer> counter) {
+    public FilterCalc(File filePath, Map<String, Integer> counter, KillThreadStatus kill)
+    {
         this.filePath = filePath;
         this.counter = counter;
+        this.kill = kill;
+
 
     }
 
@@ -32,8 +36,8 @@ public class FilterCalc implements Runnable {
                 str.append(String.valueOf((char) c));
             }
             if (!isCyrillic(str.toString())) {
-                killThreadStatus.setStatus(true);//
-                throw new InvalidSymbolExeption("Non cyrillic");
+             kill.setStatus(true);////////////////
+                throw new InvalidSymbolExeption("NON CYRILLIC!!!");
             }
             //  System.out.println(str);
             s = str.toString().split("[\\p{Punct}\\s\\d]+");                                        ////\p{P}?[ \t\n\r]+
