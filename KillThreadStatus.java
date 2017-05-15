@@ -6,11 +6,13 @@ package com.company;
 public class KillThreadStatus {
     private boolean status;
 
-    public boolean isStatus() {
+    public boolean isStatus()
+    {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(boolean status)
+    {
         this.status = status;
     }
 }
